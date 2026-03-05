@@ -9,7 +9,7 @@
 Summary:	Plasma Login Manager
 Name:		kp6-%{kpname}
 Version:	6.6.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -28,6 +28,7 @@ BuildRequires:	kf6-kconfig-devel >= 6.23.0
 BuildRequires:	kf6-kdbusaddons-devel >= 6.22.0
 BuildRequires:	kf6-ki18n-devel >= 6.22.0
 BuildRequires:	kf6-kio-devel >= 6.22.0
+BuildRequires:	kf6-kirigami-devel >= 6.22.0
 BuildRequires:	kp6-layer-shell-qt-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libkscreen-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libplasma-devel >= %{kdeplasmaver}
@@ -58,7 +59,10 @@ module (KCM).
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DKDE_INSTALL_DOCBUNDLEDIR=%{_kdedocdir} \
-	-DINSTALL_PAM_CONFIGURATION:BOOL=OFF
+	-DINSTALL_PAM_CONFIGURATION:BOOL=OFF \
+	-DKDE_INSTALL_SYSTEMDUNITDIR=/lib/systemd \
+	-DKDE_INSTALL_SYSTEMDUSERUNITDIR=/usr/lib/systemd/user
+
 %ninja_build -C build
 
 %if %{with tests}
@@ -86,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/plasma-login-wallpaper
 %attr(755,root,root) %{_bindir}/plasmalogin
 %attr(755,root,root) %{_bindir}/startplasma-login-wayland
-%{_prefix}%{systemdunitdir}/plasmalogin.service
+%{systemdunitdir}/plasmalogin.service
 %{systemduserunitdir}/plasma-login-kwin_wayland.service
 %{systemduserunitdir}/plasma-login-wayland.target
 %{systemduserunitdir}/plasma-login.service
