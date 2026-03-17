@@ -1,19 +1,19 @@
 #
-# TODO: pld pam config file
+# TODO: pld pam config files
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	6.6.2
+%define		kdeplasmaver	6.6.3
 %define		qtver		6.10.0
 %define		kpname		plasma-login-manager
 
 Summary:	Plasma Login Manager
 Name:		kp6-%{kpname}
-Version:	6.6.2
-Release:	2
+Version:	6.6.3
+Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	a09021d5c936b4ff46ebbfa3b18c92de
+# Source0-md5:	0cada6f1fef7f69288875c5d84cc3a90
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6Gui-devel >= 6.10.0
@@ -73,6 +73,9 @@ ctest
 rm -rf $RPM_BUILD_ROOT
 %ninja_install -C build
 
+mkdir -p $RPM_BUILD_ROOT/etc/pam.d
+cp -a data/pam/arch/* $RPM_BUILD_ROOT/etc/pam.d/
+
 %find_lang %{kpname} --all-name --with-kde
 
 %clean
@@ -87,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kpname}.lang
 %defattr(644,root,root,755)
 %doc README.md
+/etc/pam.d/plasmalogin
+/etc/pam.d/plasmalogin-autologin
+/etc/pam.d/plasmalogin-greeter
 %attr(755,root,root) %{_bindir}/plasma-login-wallpaper
 %attr(755,root,root) %{_bindir}/plasmalogin
 %attr(755,root,root) %{_bindir}/startplasma-login-wayland
