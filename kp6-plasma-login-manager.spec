@@ -50,6 +50,12 @@ Plasma Login provides a display manager for KDE Plasma, forked from
 providing a greeter, wallpaper plugin integration and System Settings
 module (KCM).
 
+%description -l pl.UTF-8
+Plasma Login dostarcza menadżera wyświetlania dla Plazmy, jest
+odgałęzieniem [SDDM](https://github.com/sddm/sddm) i z nowym
+frontendem dostarcza "greetera", wtyczkę integracji tapet i moduł
+ustawień KCM/
+
 %prep
 %setup -q -n %{kpname}-%{version}
 
@@ -73,7 +79,7 @@ ctest
 rm -rf $RPM_BUILD_ROOT
 %ninja_install -C build
 
-mkdir -p $RPM_BUILD_ROOT/etc/pam.d
+install -d $RPM_BUILD_ROOT/etc/pam.d
 cp -a data/pam/arch/* $RPM_BUILD_ROOT/etc/pam.d/
 
 %find_lang %{kpname} --all-name --with-kde
