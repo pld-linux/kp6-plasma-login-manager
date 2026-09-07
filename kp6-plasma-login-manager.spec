@@ -3,6 +3,7 @@
 # Conditional build:
 %bcond_with	tests		# build with tests
 %define		kdeplasmaver	6.7.4
+%define		kfver		6.26.0
 %define		qtver		6.10.0
 %define		kpname		plasma-login-manager
 
@@ -16,26 +17,37 @@ Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{vers
 # Source0-md5:	fcf0d9b0b50d85000135646e97a1296d
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6Gui-devel >= 6.10.0
-BuildRequires:	Qt6Qml-devel >= 6.8.0
-BuildRequires:	Qt6Quick-devel >= 6.8.0
-BuildRequires:	cmake >= 3.16.0
+BuildRequires:	Qt6DBus-devel >= %{qtver}
+BuildRequires:	Qt6Gui-devel >= %{qtver}
+BuildRequires:	Qt6Qml-devel >= %{qtver}
+BuildRequires:	Qt6Quick-devel >= %{qtver}
+BuildRequires:	Qt6ShaderTools-devel >= %{qtver}
+BuildRequires:	Qt6Test-devel >= %{qtver}
+BuildRequires:	cmake >= 3.22
 BuildRequires:	gettext-tools
-BuildRequires:	kf6-extra-cmake-modules >= 6.22.0
-BuildRequires:	kf6-kauth-devel >= 6.22.0
-BuildRequires:	kf6-kcmutils-devel >= 6.22.0
-BuildRequires:	kf6-kconfig-devel >= 6.23.0
-BuildRequires:	kf6-kdbusaddons-devel >= 6.22.0
-BuildRequires:	kf6-ki18n-devel >= 6.22.0
-BuildRequires:	kf6-kio-devel >= 6.22.0
-BuildRequires:	kf6-kirigami-devel >= 6.22.0
+BuildRequires:	kf6-extra-cmake-modules >= %{kfver}
+BuildRequires:	kf6-kauth-devel >= %{kfver}
+BuildRequires:	kf6-kcmutils-devel >= %{kfver}
+BuildRequires:	kf6-kconfig-devel >= %{kfver}
+BuildRequires:	kf6-kcoreaddons-devel >= %{kfver}
+BuildRequires:	kf6-kdbusaddons-devel >= %{kfver}
+BuildRequires:	kf6-ki18n-devel >= %{kfver}
+BuildRequires:	kf6-kio-devel >= %{kfver}
+BuildRequires:	kf6-kpackage-devel >= %{kfver}
+BuildRequires:	kf6-kwindowsystem-devel >= %{kfver}
 BuildRequires:	kp6-layer-shell-qt-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libkscreen-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-libplasma-devel >= %{kdeplasmaver}
 BuildRequires:	kp6-plasma-workspace-devel >= %{kdeplasmaver}
+BuildRequires:	libstdc++-devel >= 6:8
 BuildRequires:	ninja
 BuildRequires:	pam-devel
-BuildRequires:	rpmbuild(macros) >= 1.164
+BuildRequires:	pkgconfig
+BuildRequires:	qt6-linguist >= %{qtver}
+BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	systemd-devel
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libXau-devel
 BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 %requires_eq_to Qt6Core Qt6Core-devel
