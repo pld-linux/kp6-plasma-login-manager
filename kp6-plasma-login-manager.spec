@@ -2,19 +2,19 @@
 # TODO: pld pam config files
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	6.7.4
+%define		kdeplasmaver	6.7.5
 %define		kfver		6.26.0
 %define		qtver		6.10.0
 %define		kpname		plasma-login-manager
 
 Summary:	Plasma Login Manager
 Name:		kp6-%{kpname}
-Version:	6.7.4
-Release:	2
+Version:	6.7.5
+Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	fcf0d9b0b50d85000135646e97a1296d
+# Source0-md5:	b0e81db4fa3329da5b7aed5fa4edabc5
 URL:		http://www.kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6DBus-devel >= %{qtver}
